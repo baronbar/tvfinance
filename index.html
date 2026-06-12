@@ -27,7 +27,7 @@
 
         <!-- Main Grid -->
         <div class="dashboard-grid">
-            <!-- AQICN Widget - Air Quality (Free, No API Key) -->
+            <!-- AQICN Widget - Air Quality (3x3) -->
             <section class="card aqicn-card">
                 <div class="card-header">
                     <h2>🌍 Air Quality</h2>
@@ -37,7 +37,7 @@
                 </div>
             </section>
 
-            <!-- TradingView Forex & Commodities (Free Widget) -->
+            <!-- TradingView Forex & Commodities (3x3) -->
             <section class="card tradingview-forex-card">
                 <div class="card-header">
                     <h2>💱 Forex & Commodities</h2>
@@ -64,7 +64,31 @@
                 </div>
             </section>
 
-            <!-- Crypto (CoinGecko Free API - No Key Required) -->
+            <!-- Live Chart Widget (TradingView - Gold) (3x3) -->
+            <section class="card chart-card">
+                <div class="card-header">
+                    <h2>📊 Live Chart - Gold</h2>
+                </div>
+                <div class="card-content" style="padding:0;overflow:hidden;">
+                    <div id="tradingview-widget-chart"></div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js"></script>
+                    <script type="text/javascript">
+                        new TradingView.widget({
+                            "autosize": true,
+                            "symbol": "FOREXCOM:XAUUSD",
+                            "interval": "D",
+                            "timezone": "Asia/Dubai",
+                            "theme": "dark",
+                            "style": "1",
+                            "locale": "en",
+                            "enable_publishing": false,
+                            "container_id": "tradingview-widget-chart"
+                        });
+                    </script>
+                </div>
+            </section>
+
+            <!-- Crypto (CoinGecko Free API) -->
             <section class="card crypto-card">
                 <div class="card-header">
                     <h2>₿ Cryptocurrency</h2>
@@ -94,31 +118,7 @@
                 </div>
             </section>
 
-            <!-- Stock Markets (TradingView Free Widget) -->
-            <section class="card stocks-card">
-                <div class="card-header">
-                    <h2>📈 Stock Indices</h2>
-                </div>
-                <div class="card-content" style="padding:0;">
-                    <div id="tradingview-widget-stocks"></div>
-                    <script type="text/javascript">
-                        new TradingView.widget({
-                            "symbols": [
-                                {"proName":"NASDAQ:IXIC","title":"NASDAQ"},
-                                {"proName":"FOREXCOM:SPXUSD","title":"S&P 500"},
-                                {"proName":"FOREXCOM:DJI","title":"Dow Jones"}
-                            ],
-                            "showSymbolLogo": true,
-                            "colorTheme": "dark",
-                            "isTransparent": true,
-                            "locale": "en",
-                            "container_id": "tradingview-widget-stocks"
-                        });
-                    </script>
-                </div>
-            </section>
-
-            <!-- News Ticker (RSS Feed Parser - Free) -->
+            <!-- News Ticker (RSS Feed Parser) -->
             <section class="card news-card">
                 <div class="card-header">
                     <h2>📰 Latest Headlines</h2>
@@ -165,44 +165,7 @@
                 </div>
             </section>
 
-            <!-- Prayer Times (Aladhan Free API) -->
-            <section class="card prayer-card">
-                <div class="card-header">
-                    <h2>🕌 Prayer Times - Dubai</h2>
-                    <span class="loading-spinner" id="prayerLoading"></span>
-                </div>
-                <div class="card-content">
-                    <div class="prayer-times" id="prayerTimes">
-                        <div class="prayer-item">
-                            <span class="prayer-name">Fajr</span>
-                            <span class="prayer-time" id="prayer-fajr">--:--</span>
-                        </div>
-                        <div class="prayer-item">
-                            <span class="prayer-name">Sunrise</span>
-                            <span class="prayer-time" id="prayer-sunrise">--:--</span>
-                        </div>
-                        <div class="prayer-item">
-                            <span class="prayer-name">Dhuhr</span>
-                            <span class="prayer-time" id="prayer-dhuhr">--:--</span>
-                        </div>
-                        <div class="prayer-item">
-                            <span class="prayer-name">Asr</span>
-                            <span class="prayer-time" id="prayer-asr">--:--</span>
-                        </div>
-                        <div class="prayer-item">
-                            <span class="prayer-name">Maghrib</span>
-                            <span class="prayer-time" id="prayer-maghrib">--:--</span>
-                        </div>
-                        <div class="prayer-item">
-                            <span class="prayer-name">Isha</span>
-                            <span class="prayer-time" id="prayer-isha">--:--</span>
-                        </div>
-                    </div>
-                    <div class="next-prayer" id="nextPrayer">Next prayer in: -- minutes</div>
-                </div>
-            </section>
-
-            <!-- Weather Widget (WeatherWidget.io - Free) -->
+            <!-- Weather Widget -->
             <section class="card weather-card">
                 <div class="card-header">
                     <h2>🌤️ Dubai Weather</h2>
@@ -211,51 +174,6 @@
                     <a class="weatherwidget-io" href="https://weatherwidget.io/en/" data-label_1="Dubai" data-label_2="Weather" data-theme="dark" style="width:100%;height:100%;display:flex;">Dubai Weather</a>
                     <script>
                         !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
-                    </script>
-                </div>
-            </section>
-
-            <!-- Flight Information (Demo Data) -->
-            <section class="card flights-card">
-                <div class="card-header">
-                    <h2>✈️ DXB Flights (Sample)</h2>
-                </div>
-                <div class="card-content">
-                    <div class="flight-tabs">
-                        <button class="tab-btn active" id="depTab">Departures</button>
-                        <button class="tab-btn" id="arrTab">Arrivals</button>
-                    </div>
-                    <div class="flights-list" id="flightsList">
-                        <div class="flight-item">
-                            <span class="airline">EK</span>
-                            <span class="time">14:30</span>
-                            <span class="destination">London LHR</span>
-                            <span class="status">On Time</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Live Chart Widget (TradingView - Gold) -->
-            <section class="card chart-card">
-                <div class="card-header">
-                    <h2>📊 Live Chart - Gold</h2>
-                </div>
-                <div class="card-content" style="padding:0;overflow:hidden;">
-                    <div id="tradingview-widget-chart"></div>
-                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js"></script>
-                    <script type="text/javascript">
-                        new TradingView.widget({
-                            "autosize": true,
-                            "symbol": "FOREXCOM:XAUUSD",
-                            "interval": "D",
-                            "timezone": "Asia/Dubai",
-                            "theme": "dark",
-                            "style": "1",
-                            "locale": "en",
-                            "enable_publishing": false,
-                            "container_id": "tradingview-widget-chart"
-                        });
                     </script>
                 </div>
             </section>
