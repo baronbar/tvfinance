@@ -34,8 +34,8 @@ body {
 
 /* Overscan protection */
 .dashboard-wrapper {
-    width: 98vw;
-    height: 96vh;
+    width: 94vw;
+    height: 90vh;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -102,7 +102,7 @@ h2 {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr; /* 25% | 50% | 25% */
     gap: 1.5rem;
-    height: calc(86vh - 1.5rem);
+    height: calc(80vh - 1.5rem);
 }
 
 .portfolio-panel, .chart-panel { height: 100%; }
