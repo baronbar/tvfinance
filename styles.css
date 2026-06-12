@@ -137,7 +137,7 @@ body {
 .dashboard-grid {
     flex: 1;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     gap: 20px;
     padding: 20px;
@@ -243,11 +243,11 @@ body {
 }
 
 /* ===================================
-   AIR QUALITY CARD
+   AIR QUALITY CARD - 3x3
    =================================== */
 .aqicn-card {
     grid-column: span 1;
-    grid-row: span 1;
+    grid-row: span 3;
 }
 
 .aqicn-card .card-content {
@@ -314,7 +314,7 @@ body {
    NEWS CARD
    =================================== */
 .news-card {
-    grid-column: span 2;
+    grid-column: span 1;
     grid-row: span 1;
 }
 
@@ -391,162 +391,14 @@ body {
 }
 
 /* ===================================
-   PRAYER TIMES CARD
-   =================================== */
-.prayer-card {
-    grid-column: span 1;
-    grid-row: span 1;
-}
-
-.prayer-times {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    margin-bottom: 16px;
-}
-
-.prayer-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background: rgba(0, 212, 255, 0.05);
-    border-radius: 8px;
-    border: 1px solid rgba(0, 212, 255, 0.15);
-}
-
-.prayer-item .prayer-name {
-    font-size: 18px;
-    color: var(--text-secondary);
-}
-
-.prayer-item .prayer-time {
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--accent-color);
-    font-family: 'Courier New', monospace;
-}
-
-.next-prayer {
-    text-align: center;
-    font-size: 22px;
-    color: var(--accent-gold);
-    padding: 12px;
-    background: rgba(255, 215, 0, 0.1);
-    border-radius: 8px;
-    border: 1px solid rgba(255, 215, 0, 0.2);
-    font-weight: 600;
-}
-
-/* ===================================
-   FLIGHTS CARD
-   =================================== */
-.flights-card {
-    grid-column: span 1;
-    grid-row: span 1;
-}
-
-.flight-tabs {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 16px;
-    border-bottom: 2px solid var(--border-color);
-    padding-bottom: 12px;
-}
-
-.tab-btn {
-    padding: 12px 20px;
-    background: transparent;
-    border: 2px solid var(--border-color);
-    color: var(--text-secondary);
-    font-size: 20px;
-    font-weight: 600;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-}
-
-.tab-btn.active {
-    background: rgba(0, 212, 255, 0.2);
-    border-color: var(--accent-color);
-    color: var(--accent-color);
-}
-
-.tab-btn:hover {
-    border-color: var(--accent-color);
-    color: var(--accent-color);
-}
-
-.flights-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    max-height: 400px;
-    overflow-y: auto;
-}
-
-.flight-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px;
-    background: rgba(0, 212, 255, 0.05);
-    border-radius: 8px;
-    border: 1px solid rgba(0, 212, 255, 0.15);
-    font-size: 18px;
-}
-
-.flight-item .airline {
-    color: var(--text-secondary);
-    min-width: 60px;
-    font-weight: 600;
-}
-
-.flight-item .time {
-    color: var(--accent-color);
-    font-weight: 600;
-    font-family: 'Courier New', monospace;
-    min-width: 60px;
-}
-
-.flight-item .destination {
-    color: var(--text-primary);
-    flex: 1;
-    margin: 0 12px;
-}
-
-.flight-item .status {
-    color: var(--accent-green);
-    font-weight: 600;
-    min-width: 80px;
-    text-align: right;
-}
-
-.flight-item .status.delayed {
-    color: var(--accent-red);
-}
-
-/* ===================================
-   TRADINGVIEW CARDS
+   FOREX & COMMODITIES CARD - 3x3
    =================================== */
 .tradingview-forex-card {
     grid-column: span 1;
-    grid-row: span 1;
+    grid-row: span 3;
 }
 
-.stocks-card {
-    grid-column: span 1;
-    grid-row: span 1;
-}
-
-.chart-card {
-    grid-column: span 1;
-    grid-row: span 1;
-}
-
-.tradingview-forex-card .card-content,
-.stocks-card .card-content,
-.chart-card .card-content {
+.tradingview-forex-card .card-content {
     padding: 0;
 }
 
@@ -569,15 +421,20 @@ body {
 }
 
 /* ===================================
-   RESPONSIVE ADJUSTMENTS
+   LIVE CHART CARD - 3x3
    =================================== */
-@media (max-width: 2560px) {
-    .dashboard-grid {
-        grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: repeat(3, 1fr);
-    }
+.chart-card {
+    grid-column: span 1;
+    grid-row: span 3;
 }
 
+.chart-card .card-content {
+    padding: 0;
+}
+
+/* ===================================
+   RESPONSIVE ADJUSTMENTS
+   =================================== */
 @media (max-width: 1920px) {
     body {
         font-size: 18px;
@@ -611,28 +468,22 @@ body {
     .clock-item .time {
         font-size: 20px;
     }
-
-    .prayer-item .prayer-time {
-        font-size: 16px;
-    }
-
-    .flight-item {
-        font-size: 14px;
-    }
 }
 
 @media (max-width: 1280px) {
     .dashboard-grid {
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: auto;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .aqicn-card,
+    .tradingview-forex-card,
+    .chart-card {
+        grid-column: span 1;
+        grid-row: span 2;
     }
 
     .news-card {
-        grid-column: span 3;
-    }
-
-    .chart-card {
-        grid-column: span 3;
+        grid-column: span 2;
     }
 }
 
@@ -648,8 +499,7 @@ body {
    PRINT STYLES
    =================================== */
 @media print {
-    .fullscreen-btn,
-    .loading-spinner {
+    .fullscreen-btn {
         display: none !important;
     }
 }
