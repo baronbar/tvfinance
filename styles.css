@@ -73,61 +73,7 @@ body {
 }
 
 /* ===================================
-   DASHBOARD HEADER
-   =================================== */
-.dashboard-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 30px 40px;
-    background: linear-gradient(135deg, rgba(22, 33, 62, 0.8) 0%, rgba(15, 20, 25, 0.6) 100%);
-    border-bottom: 2px solid var(--border-color);
-    min-height: 120px;
-}
-
-.header-left {
-    flex: 1;
-}
-
-.dashboard-header h1 {
-    font-size: 48px;
-    font-weight: 700;
-    color: var(--accent-color);
-    margin-bottom: 8px;
-    text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
-}
-
-.current-date-time {
-    font-size: 24px;
-    color: var(--text-secondary);
-}
-
-.header-right {
-    display: flex;
-    gap: 40px;
-    align-items: center;
-    font-size: 22px;
-}
-
-.connection-status {
-    font-size: 32px;
-    color: var(--accent-green);
-    animation: pulse 2s infinite;
-}
-
-.connection-status.offline {
-    color: var(--accent-red);
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-}
-
-/* ===================================
-   DASHBOARD GRID - 6 rows total
-   Row 1-3: Large panels (3 columns)
-   Row 4-6: 2x2 grid (2 columns)
+   DASHBOARD GRID
    =================================== */
 .dashboard {
     flex: 1;
@@ -139,8 +85,8 @@ body {
 .dashboard-grid {
     flex: 1;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(6, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto 1fr;
     gap: 20px;
     padding: 20px;
     overflow-y: auto;
@@ -245,41 +191,29 @@ body {
 }
 
 /* ===================================
-   TOP ROW - 3 LARGE PANELS (rows 1-3)
+   FOREX BAND - FULL WIDTH TOP
    =================================== */
-.aqicn-card {
-    grid-column: 1;
-    grid-row: 1 / 4;
-}
-
-.aqicn-card .card-content {
-    padding: 0;
-}
-
 .tradingview-forex-card {
-    grid-column: 2;
-    grid-row: 1 / 4;
+    grid-column: 1 / -1;
+    grid-row: 1;
+    padding: 12px 24px;
+}
+
+.tradingview-forex-card .card-header {
+    display: none;
 }
 
 .tradingview-forex-card .card-content {
     padding: 0;
-}
-
-.chart-card {
-    grid-column: 3;
-    grid-row: 1 / 4;
-}
-
-.chart-card .card-content {
-    padding: 0;
+    margin: 0;
 }
 
 /* ===================================
-   BOTTOM ROW - 2x2 GRID (rows 4-6)
+   CRYPTO CARD
    =================================== */
 .crypto-card {
-    grid-column: 1 / 2;
-    grid-row: 4 / 7;
+    grid-column: 1 / 3;
+    grid-row: 2;
 }
 
 .crypto-grid {
@@ -330,83 +264,12 @@ body {
     color: var(--accent-red);
 }
 
-.news-card {
-    grid-column: 2 / 3;
-    grid-row: 4 / 7;
-}
-
-.news-ticker {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-.news-item {
-    font-size: 26px;
-    line-height: 1.5;
-    color: var(--text-primary);
-    animation: slideInNews 0.8s ease-in;
-    min-height: 80px;
-    display: flex;
-    align-items: center;
-}
-
-@keyframes slideInNews {
-    from {
-        opacity: 0;
-        transform: translateX(100px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-.world-clock-card {
-    grid-column: 3 / 4;
-    grid-row: 4 / 6;
-}
-
-.clock-grid {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 12px;
-}
-
-.clock-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px;
-    background: rgba(0, 212, 255, 0.05);
-    border-radius: 8px;
-    border: 1px solid rgba(0, 212, 255, 0.15);
-}
-
-.clock-item .city {
-    font-size: 20px;
-    color: var(--text-secondary);
-    flex: 1;
-}
-
-.clock-item .time {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--accent-color);
-    font-family: 'Courier New', monospace;
-    letter-spacing: 2px;
-}
-
-.clock-item .tz {
-    font-size: 16px;
-    color: var(--text-secondary);
-    margin-left: 12px;
-    min-width: 40px;
-}
-
+/* ===================================
+   WEATHER CARD
+   =================================== */
 .weather-card {
-    grid-column: 3 / 4;
-    grid-row: 6 / 7;
+    grid-column: 1 / 3;
+    grid-row: 3;
 }
 
 .weather-card .card-content {
@@ -420,23 +283,30 @@ body {
 }
 
 /* ===================================
+   GOLD CHART - LARGE RIGHT PANEL
+   =================================== */
+.chart-card {
+    grid-column: 3 / 5;
+    grid-row: 2 / 4;
+}
+
+.chart-card .card-content {
+    padding: 0;
+}
+
+/* ===================================
+   TRADINGVIEW FIXES
+   =================================== */
+.tradingview-widget-copyright,
+.tradingview-widget-copyright a {
+    display: none !important;
+}
+
+/* ===================================
    RESPONSIVE ADJUSTMENTS
    =================================== */
 @media (max-width: 1920px) {
     body {
-        font-size: 18px;
-    }
-
-    .dashboard-header {
-        padding: 20px 30px;
-        min-height: 100px;
-    }
-
-    .dashboard-header h1 {
-        font-size: 36px;
-    }
-
-    .current-date-time {
         font-size: 18px;
     }
 
@@ -447,63 +317,28 @@ body {
     .crypto-item .crypto-price {
         font-size: 20px;
     }
-
-    .news-item {
-        font-size: 20px;
-    }
-
-    .clock-item .time {
-        font-size: 20px;
-    }
 }
 
 @media (max-width: 1280px) {
     .dashboard-grid {
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(4, 1fr);
-    }
-
-    .aqicn-card {
-        grid-column: 1;
-        grid-row: 1 / 3;
     }
 
     .tradingview-forex-card {
-        grid-column: 2;
-        grid-row: 1 / 3;
-    }
-
-    .chart-card {
-        grid-column: 1 / 3;
-        grid-row: 3 / 5;
+        grid-column: 1 / -1;
     }
 
     .crypto-card {
         grid-column: 1;
-        grid-row: 5 / 7;
-    }
-
-    .news-card {
-        grid-column: 2;
-        grid-row: 5 / 7;
-    }
-
-    .world-clock-card {
-        grid-column: 1 / 3;
-        grid-row: 7 / 8;
     }
 
     .weather-card {
-        display: none;
+        grid-column: 2;
     }
-}
 
-/* ===================================
-   TRADINGVIEW FIXES
-   =================================== */
-.tradingview-widget-copyright,
-.tradingview-widget-copyright a {
-    display: none !important;
+    .chart-card {
+        grid-column: 1 / 3;
+    }
 }
 
 /* ===================================
