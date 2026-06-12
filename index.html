@@ -1,113 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0f0f0f">
-    <title>Dubai TV Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dubai Market Dashboard</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Full Screen Toggle -->
-    <button id="fullscreenBtn" class="fullscreen-btn" title="Toggle Fullscreen (F)">⛶</button>
+<header>
+<h1>Dubai Market Dashboard</h1>
+<div id="datetime"></div>
+</header>
 
-    <!-- Dashboard Container -->
-    <div class="dashboard">
-        <!-- Main Grid -->
-        <div class="dashboard-grid">
-            <!-- FOREX COMMODITIES BAND - Full Width Top -->
-            <section class="card tradingview-forex-card">
-                <div class="card-content" style="padding:0;">
-                    <div id="tradingview-widget-forex"></div>
-                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js"></script>
-                    <script type="text/javascript">
-                        new TradingView.widget({
-                            "symbols": [
-                                {"proName":"FOREXCOM:XAUUSD","title":"Gold"},
-                                {"proName":"FOREXCOM:XAGUSD","title":"Silver"},
-                                {"proName":"FOREXCOM:EURUSD","title":"EUR/USD"},
-                                {"proName":"FX_IDC:USDTRY","title":"USD/TRY"},
-                                {"proName":"FOREXCOM:GBPUSD","title":"GBP/USD"}
-                            ],
-                            "showSymbolLogo": true,
-                            "colorTheme": "dark",
-                            "isTransparent": true,
-                            "locale": "en",
-                            "container_id": "tradingview-widget-forex"
-                        });
-                    </script>
-                </div>
-            </section>
+<div class="grid">
+<div class="card wide">
+<script src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async></script>
+<div id="ticker">Markets</div>
+</div>
 
-            <!-- CRYPTO CARD -->
-            <section class="card crypto-card">
-                <div class="card-header">
-                    <h2>₿ Cryptocurrency</h2>
-                    <span class="loading-spinner" id="cryptoLoading"></span>
-                </div>
-                <div class="card-content crypto-grid" id="cryptoGrid">
-                    <div class="crypto-item">
-                        <span class="crypto-name">Bitcoin</span>
-                        <span class="crypto-price" id="btc-price">--</span>
-                        <span class="crypto-change" id="btc-change">--</span>
-                    </div>
-                    <div class="crypto-item">
-                        <span class="crypto-name">Ethereum</span>
-                        <span class="crypto-price" id="eth-price">--</span>
-                        <span class="crypto-change" id="eth-change">--</span>
-                    </div>
-                    <div class="crypto-item">
-                        <span class="crypto-name">Ripple</span>
-                        <span class="crypto-price" id="xrp-price">--</span>
-                        <span class="crypto-change" id="xrp-change">--</span>
-                    </div>
-                    <div class="crypto-item">
-                        <span class="crypto-name">Cardano</span>
-                        <span class="crypto-price" id="ada-price">--</span>
-                        <span class="crypto-change" id="ada-change">--</span>
-                    </div>
-                </div>
-            </section>
+<div class="card"><h2>Crypto</h2><div id="crypto"></div></div>
+<div class="card"><h2>World Clocks</h2><div id="clocks"></div></div>
+<div class="card"><h2>Financial News</h2><div id="news">Loading...</div></div>
+<div class="card"><h2>Dubai AQI</h2><iframe src="https://aqicn.org/city/uae/dubai/" class="frame"></iframe></div>
+<div class="card"><h2>Gold Chart</h2><iframe src="https://www.tradingview.com/chart/" class="frame"></iframe></div>
+</div>
 
-            <!-- WEATHER CARD -->
-            <section class="card weather-card">
-                <div class="card-header">
-                    <h2>🌤️ Dubai Weather</h2>
-                </div>
-                <div class="card-content" style="padding:0;overflow:hidden;">
-                    <a class="weatherwidget-io" href="https://weatherwidget.io/en/" data-label_1="Dubai" data-label_2="Weather" data-theme="dark" style="width:100%;height:100%;display:flex;">Dubai Weather</a>
-                    <script>
-                        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
-                    </script>
-                </div>
-            </section>
-
-            <!-- GOLD CHART - LARGE RIGHT PANEL -->
-            <section class="card chart-card">
-                <div class="card-header">
-                    <h2>📊 Live Chart - Gold</h2>
-                </div>
-                <div class="card-content" style="padding:0;overflow:hidden;">
-                    <div id="tradingview-widget-chart"></div>
-                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js"></script>
-                    <script type="text/javascript">
-                        new TradingView.widget({
-                            "autosize": true,
-                            "symbol": "FOREXCOM:XAUUSD",
-                            "interval": "D",
-                            "timezone": "Asia/Dubai",
-                            "theme": "dark",
-                            "style": "1",
-                            "locale": "en",
-                            "enable_publishing": false,
-                            "container_id": "tradingview-widget-chart"
-                        });
-                    </script>
-                </div>
-            </section>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
