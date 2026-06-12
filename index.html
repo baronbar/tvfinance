@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0f0f0f">
+    <title>Dubai TV Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Full Screen Toggle -->
+    <button id="fullscreenBtn" class="fullscreen-btn" title="Toggle Fullscreen (F)">⛶</button>
+
+    <!-- Dashboard Container -->
+    <div class="dashboard">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-left">
+                <h1>Dubai Dashboard</h1>
+                <span class="current-date-time" id="dateTime"></span>
+            </div>
+            <div class="header-right">
+                <span class="refresh-indicator" id="refreshIndicator">Auto-refresh: 5m</span>
+                <span class="connection-status" id="connectionStatus">●</span>
+            </div>
+        </header>
+
+        <!-- Main Grid -->
+        <div class="dashboard-grid">
+            <!-- AQICN Widget - Air Quality (Free, No API Key) -->
+            <section class="card aqicn-card">
+                <div class="card-header">
+                    <h2>🌍 Air Quality</h2>
+                </div>
+                <div class="card-content">
+                    <iframe src="https://aqicn.org/embed/dubai/" style="width:100%;height:100%;border:none;border-radius:8px;background:transparent;" allowfullscreen="true"></iframe>
+                </div>
+            </section>
+
+            <!-- TradingView Forex & Commodities (Free Widget) -->
+            <section class="card tradingview-forex-card">
+                <div class="card-header">
+                    <h2>💱 Forex & Commodities</h2>
+                </div>
+                <div class="card-content" style="padding:0;">
+                    <div id="tradingview-widget-forex"></div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js"></script>
+                    <script type="text/javascript">
+                        new TradingView.widget({
+                            "symbols": [
+                                {"proName":"FOREXCOM:XAUUSD","title":"Gold"},
+                                {"proName":"FOREXCOM:XAGUSD","title":"Silver"},
+                                {"proName":"FOREXCOM:EURUSD","title":"EUR/USD"},
+                                {"proName":"FX_IDC:USDTRY","title":"USD/TRY"},
+                                {"proName":"FOREXCOM:GBPUSD","title":"GBP/USD"}
+                            ],
+                            "showSymbolLogo": true,
+                            "colorTheme": "dark",
+                            "isTransparent": true,
+                            "locale": "en",
+                            "container_id": "tradingview-widget-forex"
+                        });
+                    </script>
+                </div>
+            </section>
+
+            <!-- Crypto (CoinGecko Free API - No Key Required) -->
+            <section class="card crypto-card">
+                <div class="card-header">
+                    <h2>₿ Cryptocurrency</h2>
+                    <span class="loading-spinner" id="cryptoLoading"></span>
+                </div>
+                <div class="card-content crypto-grid" id="cryptoGrid">
+                    <div class="crypto-item">
+                        <span class="crypto-name">Bitcoin</span>
+                        <span class="crypto-price" id="btc-price">--</span>
+                        <span class="crypto-change" id="btc-change">--</span>
+                    </div>
+                    <div class="crypto-item">
+                        <span class="crypto-name">Ethereum</span>
+                        <span class="crypto-price" id="eth-price">--</span>
+                        <span class="crypto-change" id="eth-change">--</span>
+                    </div>
+                    <div class="crypto-item">
+                        <span class="crypto-name">Ripple</span>
+                        <span class="crypto-price" id="xrp-price">--</span>
+                        <span class="crypto-change" id="xrp-change">--</span>
+                    </div>
+                    <div class="crypto-item">
+                        <span class="crypto-name">Cardano</span>
+                        <span class="crypto-price" id="ada-price">--</span>
+                        <span class="crypto-change" id="ada-change">--</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stock Markets (TradingView Free Widget) -->
+            <section class="card stocks-card">
+                <div class="card-header">
+                    <h2>📈 Stock Indices</h2>
+                </div>
+                <div class="card-content" style="padding:0;">
+                    <div id="tradingview-widget-stocks"></div>
+                    <script type="text/javascript">
+                        new TradingView.widget({
+                            "symbols": [
+                                {"proName":"NASDAQ:IXIC","title":"NASDAQ"},
+                                {"proName":"FOREXCOM:SPXUSD","title":"S&P 500"},
+                                {"proName":"FOREXCOM:DJI","title":"Dow Jones"}
+                            ],
+                            "showSymbolLogo": true,
+                            "colorTheme": "dark",
+                            "isTransparent": true,
+                            "locale": "en",
+                            "container_id": "tradingview-widget-stocks"
+                        });
+                    </script>
+                </div>
+            </section>
+
+            <!-- News Ticker (RSS Feed Parser - Free) -->
+            <section class="card news-card">
+                <div class="card-header">
+                    <h2>📰 Latest Headlines</h2>
+                    <span class="loading-spinner" id="newsLoading"></span>
+                </div>
+                <div class="card-content">
+                    <div class="news-ticker">
+                        <div class="news-item" id="newsContent">Loading news...</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- World Clock -->
+            <section class="card world-clock-card">
+                <div class="card-header">
+                    <h2>🌐 World Clock</h2>
+                </div>
+                <div class="card-content clock-grid">
+                    <div class="clock-item">
+                        <div class="city">Dubai</div>
+                        <div class="time" id="time-dubai">--:--</div>
+                        <div class="tz">GST</div>
+                    </div>
+                    <div class="clock-item">
+                        <div class="city">Istanbul</div>
+                        <div class="time" id="time-istanbul">--:--</div>
+                        <div class="tz">EET</div>
+                    </div>
+                    <div class="clock-item">
+                        <div class="city">Sofia</div>
+                        <div class="time" id="time-sofia">--:--</div>
+                        <div class="tz">EET</div>
+                    </div>
+                    <div class="clock-item">
+                        <div class="city">London</div>
+                        <div class="time" id="time-london">--:--</div>
+                        <div class="tz">GMT</div>
+                    </div>
+                    <div class="clock-item">
+                        <div class="city">New York</div>
+                        <div class="time" id="time-newyork">--:--</div>
+                        <div class="tz">EST</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Prayer Times (Aladhan Free API) -->
+            <section class="card prayer-card">
+                <div class="card-header">
+                    <h2>🕌 Prayer Times - Dubai</h2>
+                    <span class="loading-spinner" id="prayerLoading"></span>
+                </div>
+                <div class="card-content">
+                    <div class="prayer-times" id="prayerTimes">
+                        <div class="prayer-item">
+                            <span class="prayer-name">Fajr</span>
+                            <span class="prayer-time" id="prayer-fajr">--:--</span>
+                        </div>
+                        <div class="prayer-item">
+                            <span class="prayer-name">Sunrise</span>
+                            <span class="prayer-time" id="prayer-sunrise">--:--</span>
+                        </div>
+                        <div class="prayer-item">
+                            <span class="prayer-name">Dhuhr</span>
+                            <span class="prayer-time" id="prayer-dhuhr">--:--</span>
+                        </div>
+                        <div class="prayer-item">
+                            <span class="prayer-name">Asr</span>
+                            <span class="prayer-time" id="prayer-asr">--:--</span>
+                        </div>
+                        <div class="prayer-item">
+                            <span class="prayer-name">Maghrib</span>
+                            <span class="prayer-time" id="prayer-maghrib">--:--</span>
+                        </div>
+                        <div class="prayer-item">
+                            <span class="prayer-name">Isha</span>
+                            <span class="prayer-time" id="prayer-isha">--:--</span>
+                        </div>
+                    </div>
+                    <div class="next-prayer" id="nextPrayer">Next prayer in: -- minutes</div>
+                </div>
+            </section>
+
+            <!-- Weather Widget (WeatherWidget.io - Free) -->
+            <section class="card weather-card">
+                <div class="card-header">
+                    <h2>🌤️ Dubai Weather</h2>
+                </div>
+                <div class="card-content" style="padding:0;overflow:hidden;">
+                    <a class="weatherwidget-io" href="https://weatherwidget.io/en/" data-label_1="Dubai" data-label_2="Weather" data-theme="dark" style="width:100%;height:100%;display:flex;">Dubai Weather</a>
+                    <script>
+                        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+                    </script>
+                </div>
+            </section>
+
+            <!-- Flight Information (Demo Data) -->
+            <section class="card flights-card">
+                <div class="card-header">
+                    <h2>✈️ DXB Flights (Sample)</h2>
+                </div>
+                <div class="card-content">
+                    <div class="flight-tabs">
+                        <button class="tab-btn active" id="depTab">Departures</button>
+                        <button class="tab-btn" id="arrTab">Arrivals</button>
+                    </div>
+                    <div class="flights-list" id="flightsList">
+                        <div class="flight-item">
+                            <span class="airline">EK</span>
+                            <span class="time">14:30</span>
+                            <span class="destination">London LHR</span>
+                            <span class="status">On Time</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Live Chart Widget (TradingView - Gold) -->
+            <section class="card chart-card">
+                <div class="card-header">
+                    <h2>📊 Live Chart - Gold</h2>
+                </div>
+                <div class="card-content" style="padding:0;overflow:hidden;">
+                    <div id="tradingview-widget-chart"></div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js"></script>
+                    <script type="text/javascript">
+                        new TradingView.widget({
+                            "autosize": true,
+                            "symbol": "FOREXCOM:XAUUSD",
+                            "interval": "D",
+                            "timezone": "Asia/Dubai",
+                            "theme": "dark",
+                            "style": "1",
+                            "locale": "en",
+                            "enable_publishing": false,
+                            "container_id": "tradingview-widget-chart"
+                        });
+                    </script>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
