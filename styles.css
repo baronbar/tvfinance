@@ -127,3 +127,38 @@ h2 {
 }
 .news-item:last-child { border-bottom: none; }
 .news-time { color: var(--accent-blue); font-size: 0.9rem; font-weight: 600; display: block; margin-bottom: 0.3rem;}
+/* --- TRADINGVIEW WIDGET HEIGHT FIXES --- */
+
+/* 1. Force Center Chart to fill the void */
+.chart-panel {
+    display: flex;
+    flex-direction: column;
+}
+.chart-panel .tradingview-widget-container {
+    flex: 1;
+    height: 100% !important;
+    width: 100% !important;
+}
+#tv_chart {
+    height: 100% !important;
+}
+
+/* 2. Force Calendar to expand */
+.calendar-panel {
+    display: flex;
+    flex-direction: column;
+}
+.calendar-panel .tradingview-widget-container {
+    flex: 1;
+    height: 100% !important;
+    width: 100% !important;
+}
+
+/* 3. Ensure Left Portfolio panel uses absolute height correctly */
+.portfolio-panel {
+    display: flex;
+    flex-direction: column;
+}
+.portfolio-panel .tradingview-widget-container {
+    flex: 1;
+}
